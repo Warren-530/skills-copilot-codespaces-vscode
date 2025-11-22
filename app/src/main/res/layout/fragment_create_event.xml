@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CreateEventFragment">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Create New Event"
+                android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+            <ImageView
+                android:id="@+id/ivEventBanner"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginTop="16dp"
+                android:background="@android:color/darker_gray"
+                android:scaleType="centerCrop" />
+
+            <Button
+                android:id="@+id/btnSelectBanner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Select Banner Image" />
+
+            <EditText
+                android:id="@+id/etEventTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Event Title" />
+
+            <EditText
+                android:id="@+id/etEventDesc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:gravity="top"
+                android:hint="Description"
+                android:inputType="textMultiLine"
+                android:lines="4" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Event Posters (Max 5)" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvSelectedPostersPreview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="8dp"/>
+
+            <Button
+                android:id="@+id/btnSelectPoster"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Add Poster(s)" />
+
+            <EditText
+                android:id="@+id/etEventDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:focusable="false"
+                android:hint="Date" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etStartTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="false"
+                    android:hint="Start Time" />
+
+                <EditText
+                    android:id="@+id/etEndTime"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:focusable="false"
+                    android:hint="End Time" />
+            </LinearLayout>
+
+            <EditText
+                android:id="@+id/etLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Location" />
+
+            <EditText
+                android:id="@+id/etMaxParticipants"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="Max Participants"
+                android:inputType="number" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Collaborators"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/etCollaboratorId"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:hint="Enter User ID" />
+
+                <Button
+                    android:id="@+id/btnAddCollaborator"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tvCollaboratorList"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Sustainability Checklist"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+                
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Technology" 
+                android:textStyle="bold"/>
+            <CheckBox android:id="@+id/cbDigitalTickets" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Digital Tickets"/>
+            <CheckBox android:id="@+id/cbPaperlessMaterials" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Paperless Materials"/>
+            <CheckBox android:id="@+id/cbDigitalFeedback" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Digital Feedback"/>
+            <CheckBox android:id="@+id/cbHybridOption" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Hybrid Option"/>
+            <CheckBox android:id="@+id/cbSmartNotifs" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Smart Notifications"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Food &amp; Beverage"
+                android:textStyle="bold" />
+            <CheckBox android:id="@+id/cbNoPlastic" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="No Single-Use Plastic"/>
+            <CheckBox android:id="@+id/cbByoContainer" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="BYO Container Encouraged"/>
+            <CheckBox android:id="@+id/cbPlantBased" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Plant-Based Options"/>
+            <CheckBox android:id="@+id/cbSmartCatering" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Smart Catering (RSVP-based)"/>
+            <CheckBox android:id="@+id/cbFoodRecovery" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Food Recovery Program"/>
+            
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Energy &amp; Transport"
+                android:textStyle="bold" />
+            <CheckBox android:id="@+id/cbPublicTransport" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Promote Public Transport"/>
+            <CheckBox android:id="@+id/cbNaturalLight" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Venue with Natural Light"/>
+            <CheckBox android:id="@+id/cbEcoTemp" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Eco-friendly Temperature"/>
+            <CheckBox android:id="@+id/cbPowerDown" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Power-Down Policy"/>
+            <CheckBox android:id="@+id/cbCarbonOffset" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Carbon Offset Option"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Materials &amp; Waste"
+                android:textStyle="bold" />
+            <CheckBox android:id="@+id/cbDigitalPromo" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Digital-First Promotion"/>
+            <CheckBox android:id="@+id/cbReusableSignage" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Reusable Signage"/>
+            <CheckBox android:id="@+id/cbSustSwag" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sustainable Swag"/>
+            <CheckBox android:id="@+id/cbBadgeReturn" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Badge Return System"/>
+            <CheckBox android:id="@+id/cbRecyclingBins" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Clearly Marked Recycling Bins"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="Community &amp; Inclusivity"
+                android:textStyle="bold" />
+            <CheckBox android:id="@+id/cbWheelchair" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Wheelchair Accessible Venue"/>
+            <CheckBox android:id="@+id/cbGenderNeutral" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Gender-Neutral Restrooms"/>
+            <CheckBox android:id="@+id/cbDiverseLineup" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Diverse Speaker Lineup"/>
+            <CheckBox android:id="@+id/cbLocalSourcing" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Local &amp; Ethical Sourcing"/>
+            <CheckBox android:id="@+id/cbWellnessArea" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Dedicated Wellness Area"/>
+
+            <RatingBar
+                android:id="@+id/rbSustainabilityScore"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:numStars="5"
+                android:stepSize="0.1" />
+
+            <TextView
+                android:id="@+id/tvScoreLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Sustainability Score" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:visibility="gone"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btnSaveDraft"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Save Draft" />
+
+                <Button
+                    android:id="@+id/btnPublishEvent"
+                    style="?attr/buttonBarButtonStyle"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Publish" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </ScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>
