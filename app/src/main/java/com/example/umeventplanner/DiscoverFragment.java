@@ -61,9 +61,11 @@ public class DiscoverFragment extends Fragment implements OnEventClickListener {
 
     @Override
     public void onEventClick(Event event) {
-        getParentFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, EventDetailsFragment.newInstance(event))
-                .addToBackStack(null)
-                .commit();
+        if (event != null && event.getEventId() != null) {
+            getParentFragmentManager().beginTransaction()
+                    .replace(R.id.fragment_container, EventDetailsFragment.newInstance(event.getEventId()))
+                    .addToBackStack(null)
+                    .commit();
+        }
     }
 }

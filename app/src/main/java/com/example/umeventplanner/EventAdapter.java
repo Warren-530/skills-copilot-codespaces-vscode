@@ -4,10 +4,13 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import java.util.List;
 
@@ -33,9 +36,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = eventList.get(position);
+        
         holder.tvEventTitle.setText(event.getTitle());
         holder.tvEventDate.setText(event.getDate());
-        holder.tvGreenScore.setText(String.valueOf(event.getSustainabilityScore()));
+        holder.tvEventLocation.setText(event.getLocation());
+        holder.tvGreenScore.setText(String.format("%.1f", event.getSustainabilityScore()));
+
+        if (event.getBannerUrl() != null && !event.getBannerUrl().isEmpty()) {
+            Glide.with(context)
+                .load(event.getBannerUrl())
+                .into(holder.ivEventImage);
+        }
 
         holder.itemView.setOnClickListener(v -> {
             if (onEventClickListener != null) {
@@ -51,12 +62,15 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
 
     public static class EventViewHolder extends RecyclerView.ViewHolder {
 
-        TextView tvEventTitle, tvEventDate, tvGreenScore;
+        ImageView ivEventImage;
+        TextView tvEventTitle, tvEventDate, tvEventLocation, tvGreenScore;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
+            ivEventImage = itemView.findViewById(R.id.ivEventImage);
             tvEventTitle = itemView.findViewById(R.id.tvEventTitle);
             tvEventDate = itemView.findViewById(R.id.tvEventDate);
+            tvEventLocation = itemView.findViewById(R.id.tvEventLocation);
             tvGreenScore = itemView.findViewById(R.id.tvGreenScore);
         }
     }

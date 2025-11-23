@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -36,7 +38,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setContentView(R.layout.activity_main);
 
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
-        if (mAuth.getCurrentUser() == null) {
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+        if (currentUser == null) {
             startActivity(new Intent(this, LoginActivity.class));
             finish();
             return;
@@ -57,9 +61,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         toggleRole = findViewById(R.id.toggleRole);
 
-        setupRoleToggle(mAuth.getCurrentUser());
+        setupRoleToggle(currentUser);
         setupBottomNavigation();
-        updateNavHeader(mAuth.getCurrentUser());
+        updateNavHeader(currentUser);
 
         if (savedInstanceState == null) {
             loadFragment(new DiscoverFragment());
@@ -73,15 +77,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         TextView navHeaderName = headerView.findViewById(R.id.nav_header_name);
         TextView navHeaderEmail = headerView.findViewById(R.id.nav_header_email);
 
-        navHeaderEmail.setText(currentUser.getEmail());
-
-        FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get()
-            .addOnSuccessListener(documentSnapshot -> {
-                if (documentSnapshot.exists()) {
-                    String name = documentSnapshot.getString("name");
-                    navHeaderName.setText(name);
-                }
-            });
+        if (currentUser != null) {
+            navHeaderEmail.setText(currentUser.getEmail());
+            FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get()
+                .addOnSuccessListener(documentSnapshot -> {
+                    if (documentSnapshot.exists()) {
+                        String name = documentSnapshot.getString("name");
+                        navHeaderName.setText(name);
+                    }
+                });
+        }
     }
     
     @Override
@@ -99,6 +104,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void setupRoleToggle(FirebaseUser currentUser) {
+        if (currentUser == null) return;
         FirebaseFirestore.getInstance().collection("users").document(currentUser.getUid()).get()
             .addOnSuccessListener(documentSnapshot -> {
                 if (documentSnapshot.exists()) {
@@ -170,10 +176,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void loadFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragment_container, fragment);
-        fragmentTransaction.commit();
+        if (!isFinishing()) {
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+            fragmentTransaction.replace(R.id.fragment_container, fragment);
+            fragmentTransaction.commit();
+        }
     }
 
     @Override
